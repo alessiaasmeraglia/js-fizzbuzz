@@ -18,14 +18,14 @@ for (i = 1; i <=100; i++){
     }
 } */
 
-const output = document.getElementById("output");
+const output = document.getElementById("container");
 
 for (i = 1; i <=100; i++){
     let a = "";
 
     if (i % 3 === 0)
         a += "Fizz";
-    else if(i % 5 === 0)
+    if(i % 5 === 0)
         a += "Buzz";
 
     output.innerHTML += (a || i) + " ";
