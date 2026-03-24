@@ -9,7 +9,7 @@ for (i = 1; i <=100; i++){
         console.log("Buzz");
     }
     // Se il numero è divisibile sia per 3 che per 5
-    else if (i % 3 === 0 && i % 5 === 0) {
+    if (i % 3 === 0 && i % 5 === 0) {
     console.log("FizzBuzz");
     }
     // Altrimenti stampare il numero
