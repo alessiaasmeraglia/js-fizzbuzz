@@ -18,6 +18,8 @@ for (i = 1; i <=100; i++){
     }
 } */
 
+const output = document.getElementById("output");
+
 for (i = 1; i <=100; i++){
     let a = "";
 
@@ -26,5 +28,5 @@ for (i = 1; i <=100; i++){
     else if(i % 5 === 0)
         a += "Buzz";
 
-    console.log(a || i);
+    output.innerHTML += (a || i) + " ";
 }
