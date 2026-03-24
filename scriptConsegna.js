@@ -1,4 +1,4 @@
-/* // Stampare i numeri da 1 a 100
+// Stampare i numeri da 1 a 100
 for (i = 1; i <=100; i++){
     // Se il numero è divisibile solo per 3
     if (i % 3 === 0) {
@@ -16,7 +16,9 @@ for (i = 1; i <=100; i++){
     else {
         console.log(i);
     }
-} */
+}
+
+/* Programma che fa vedere direttamente nell'html l'esecuzione
 
 const output = document.getElementById("container");
 
@@ -25,8 +27,10 @@ for (i = 1; i <=100; i++){
 
     if (i % 3 === 0)
         a += "Fizz";
+    
     if(i % 5 === 0)
         a += "Buzz";
 
     output.innerHTML += (a || i) + " ";
 }
+ */
