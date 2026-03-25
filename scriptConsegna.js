@@ -1,5 +1,8 @@
+'use strict';
+
+
 // Stampare i numeri da 1 a 100
-for (i = 1; i <=100; i++){
+for (let i = 1; i <=100; i++){
     // Se il numero è divisibile solo per 3
     if (i % 3 === 0) {
         console.log("Fizz");
