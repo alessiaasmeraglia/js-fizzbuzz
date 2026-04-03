@@ -1,65 +1,89 @@
-// Creo un array vuoto
-let numeri = [];
+'use strict';
 
-// Inserisco i numeri da 1 a 100 dentro l'array
+// Array con i numeri da 1 a 100
+const numeri = [];
+
 for (let i = 1; i <= 100; i++) {
-    numeri.push(i);
+  numeri.push(i);
 }
 
-// Funzione per prendere un numero random dall'array
-function generaNumeroRandom(array) {
-  let indiceRandom = Math.floor(Math.random() * array.length);
-    return array[indiceRandom];
+// Funzione che genera un indice casuale
+function generaIndiceRandom(max) {
+  return Math.floor(Math.random() * max);
 }
 
-window.addEventListener("load", () => {
-    // Selezione elementi DOM
-    let container = document.getElementById("container");
-    let risultatoElement = document.getElementById("risultato");
-    let boxes = container.children;
+// Funzione che estrae numeri unici casuali
+function estraiNumeriUnici(array, quantita) {
+  const copiaArray = [...array];
+  const numeriEstratti = [];
 
-    // Array che conterrà i 10 numeri random
-    let numeriEstratti = [];
+  for (let i = 0; i < quantita; i++) {
+    const indiceRandom = generaIndiceRandom(copiaArray.length);
+    const numeroRandom = copiaArray[indiceRandom];
 
-    // Scrivo 10 numeri unici random nei div
-    for (let i = 0; i < boxes.length; i++) {
-    let indiceRandom = Math.floor(Math.random() * numeri.length);
-    let numeroRandom = numeri[indiceRandom];
+    numeriEstratti.push(numeroRandom);
+    copiaArray.splice(indiceRandom, 1);
+  }
 
-        numeriEstratti.push(numeroRandom);
-        boxes[i].textContent = numeroRandom;
+  return numeriEstratti;
+}
 
-        numeri.splice(indiceRandom, 1);
+// Funzione che controlla FizzBuzz
+function controllaFizzBuzz(numero) {
+  if (numero % 3 === 0 && numero % 5 === 0) {
+    return 'FizzBuzz';
+  }
+
+  if (numero % 3 === 0) {
+    return 'Fizz';
+  }
+
+  if (numero % 5 === 0) {
+    return 'Buzz';
+  }
+
+  return numero;
+}
+
+// Recupero elementi DOM
+const container = document.getElementById('container');
+const risultatoElement = document.getElementById('risultato');
+const buttonControllo = document.getElementById('btControllo');
+const boxes = container.children;
+
+// Estraggo 10 numeri casuali unici
+const numeriEstratti = estraiNumeriUnici(numeri, boxes.length);
+
+// Stampo i numeri iniziali nei box
+for (let i = 0; i < boxes.length; i++) {
+  boxes[i].textContent = numeriEstratti[i];
+}
+
+// Evento click
+buttonControllo.addEventListener('click', function () {
+  const risultati = [];
+
+  for (let i = 0; i < boxes.length; i++) {
+    const numero = numeriEstratti[i];
+    const valoreFizzBuzz = controllaFizzBuzz(numero);
+
+    boxes[i].classList.remove('fizz', 'buzz', 'fizzbuzz', 'normale');
+    boxes[i].textContent = valoreFizzBuzz;
+
+    if (valoreFizzBuzz === 'FizzBuzz') {
+      boxes[i].classList.add('fizzbuzz');
+      risultati.push(`${numero} = FizzBuzz`);
+    } else if (valoreFizzBuzz === 'Fizz') {
+      boxes[i].classList.add('fizz');
+      risultati.push(`${numero} = Fizz`);
+    } else if (valoreFizzBuzz === 'Buzz') {
+      boxes[i].classList.add('buzz');
+      risultati.push(`${numero} = Buzz`);
+    } else {
+      boxes[i].classList.add('normale');
+      risultati.push(`${numero} = numero normale`);
     }
+  }
 
- // Evento click sul bottone
-document.getElementById("btControllo").addEventListener("click", () => {
-    let risultati = [];
-
-    for (let i = 0; i < boxes.length; i++) {
-    let numero = parseInt(boxes[i].textContent);
-
-      // Tolgo eventuali classi vecchie
-        boxes[i].classList.remove("fizz", "buzz", "fizzbuzz", "normale");
-
-        if (numero % 3 === 0 && numero % 5 === 0) {
-            boxes[i].textContent = "FizzBuzz";
-            boxes[i].classList.add("fizzbuzz");
-            risultati.push(numero + " = FizzBuzz");
-        } else if (numero % 3 === 0) {
-            boxes[i].textContent = "Fizz";
-            boxes[i].classList.add("fizz");
-            risultati.push(numero + " = Fizz");
-        } else if (numero % 5 === 0) {
-            boxes[i].textContent = "Buzz";
-            boxes[i].classList.add("buzz");
-            risultati.push(numero + " = Buzz");
-        } else {
-            boxes[i].classList.add("normale");
-            risultati.push(numero + " = numero normale");
-        }
-    }
-
-    risultatoElement.innerHTML = risultati.join(" | ");
-    });
+  risultatoElement.textContent = risultati.join(' | ');
 });
